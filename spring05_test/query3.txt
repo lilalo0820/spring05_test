@@ -1,0 +1,10 @@
+create table member (
+userid varchar2(50) primary key,
+passwd varchar2(50) not null,
+name varchar2(50) not null
+);
+insert into member (userid,passwd,name) values ('tester','1111','tester');
+commit;
+
+
+맴버 로그인

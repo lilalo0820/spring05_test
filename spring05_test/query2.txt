@@ -1,0 +1,10 @@
+create table admin (
+userid varchar2(50) primary key,
+passwd varchar2(50) not null,
+name varchar2(50) not null
+);
+insert into admin (userid,passwd,name) values ('admin','1234','관리자');
+commit;
+
+
+관리자 로그인

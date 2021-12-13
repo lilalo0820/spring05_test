@@ -1,0 +1,39 @@
+create table product (
+product_code number primary key,
+product_name varchar2(500) not null,
+description varchar2(4000),
+price number default 0,
+filename varchar2(500)
+);
+
+create sequence product_seq
+start with 1
+increment by 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!-- 맴버 로그인 -->
+<mapper namespace="member">
+<!-- 	<select id="login" resultType="String" parameterType="com.example.spring04.model.memberDTO"> -->
+<!-- 	parameterType은 생략가능 -->
+	<select id="login" resultType="String">
+		select name
+		from member
+		where userid=#{userid} and passwd=#{passwd}
+	</select>
+</mapper>

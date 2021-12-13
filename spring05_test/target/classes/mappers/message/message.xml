@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!--  	AOP 적용  트랜젝션 -->
+<mapper namespace="message">
+	<insert id="create">
+		insert into message (idx,receive_id,sender,message)
+		values (message_seq.nextval , #{receive_id}, #{sender}, #{message})
+	</insert>
+	
+	<select id="list" resultType="com.example.spring04.model.message.MessageDTO">
+		select * from message where receive_id = #{userid}
+	</select>
+	
+	<select id="pointUserList" resultType="com.example.spring04.model.message.PointUserDTO">
+		select * from point_user
+	</select>	
+	
+	
+<!-- 	FOR EACH NEXTVAL 사용하지 않을경우 -->
+	
+<!-- 	<insert id="insertMessageList" parameterType="java.util.HashMap">   -->
+<!-- 		<foreach collection="messageList" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">  -->
+<!-- 		    into message ( idx , receive_id,sender, message) -->
+<!-- 			values (message_seq.nextval , #{item.receive_id}, #{item.sender}, #{item.message}) -->
+<!-- 		</foreach>   -->
+<!-- 	</insert> -->
+	
+<!-- 	FOR EACH NEXTVAL 사용할 경우 -->
+	<insert id="insertMessageList" parameterType="java.util.HashMap">  
+		  	INSERT INTO MESSAGE ( IDX , RECEIVE_ID,SENDER, MESSAGE)
+		  	SELECT MESSAGE_SEQ.NEXTVAL, A.* FROM (
+		    <foreach item="item" collection="messageList" separator="UNION ALL " >
+		        SELECT #{item.receive_id} AS RECEIVE_ID,
+		        #{item.sender} AS SENDER,
+		        #{item.message} AS MESSAGE
+		        FROM DUAL
+		    </foreach>) A
+	</insert>
+	
+</mapper>

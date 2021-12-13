@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!--  	AOP 적용  트랜젝션 -->
+<mapper namespace="point">
+	<update id="updatePoint">
+		update point_user set point = point + #{point} where userid = #{userid}
+	</update>
+</mapper>

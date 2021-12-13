@@ -1,0 +1,36 @@
+drop table point_user cascade constraints;
+
+create table point_user (
+userid varchar2(50) primary key,
+pwd varchar2(50) not null,
+name varchar2(100) not null,
+point number default 0
+);
+
+create table message (
+idx number primary key,
+receive_id varchar2(50) not null,
+sender varchar2(50) not null,
+message varchar2(4000) not null,
+open_date date,
+send_date date default sysdate
+);
+
+create sequence message_seq
+start with 1
+increment by 1;
+
+alter table message add constraint fk_receive_id foreign key(receive_id) references point_user(userid);
+-- message 테이블의  receive_id는 point_user의 userid가 존재해야만 함을 명시
+alter table message add constraint fk_sender foreign key (sender) references point_user(userid);
+
+insert into point_user (userid, pwd, name) values ('kim','1234','kim');
+insert into point_user (userid, pwd, name) values ('park','1234','park');
+insert into point_user (userid, pwd, name) values ('choi','1234','choi');
+insert into point_user (userid, pwd, name) values ('admin','1234','admin');
+insert into point_user (userid, pwd, name) values ('tester','1234','tester');
+
+insert into message
+
+
+commit;
